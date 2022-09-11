@@ -1,5 +1,5 @@
-import { Fragment, useState } from "react";
-import { allHeroes } from "../../data/heroes";
+import { Dispatch, Fragment, SetStateAction, useState } from "react";
+import { allHeroes, SingleHero } from "../../data/heroes";
 import { ChevronUpDownIcon, CheckIcon } from "@heroicons/react/24/solid";
 import { Transition, Listbox } from "@headlessui/react";
 
@@ -7,8 +7,8 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-const heroes = [...allHeroes];
-const ALL_HEROES_LENGTH = heroes.length;
+const everyHero = [...allHeroes].sort((a, b) => a.name.localeCompare(b.name));
+const ALL_HEROES_LENGTH = everyHero.length;
 const avatar = (id: number) => {
   const avatars = [
     "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'",
@@ -26,9 +26,13 @@ const avatar = (id: number) => {
   return avatars[a];
 };
 
-const UnlockedHeroes = () => {
-  const [selectedHeroes, setSelectedPeople] = useState([...allHeroes]);
-  const SELECTED_HEROES_LENGTH = selectedHeroes.length;
+interface iUnlockedHeroes {
+  heroes: SingleHero[];
+  onChange: Dispatch<SetStateAction<SingleHero[]>>;
+}
+
+const UnlockedHeroes = ({ heroes, onChange }: iUnlockedHeroes) => {
+  const SELECTED_HEROES_LENGTH = heroes.length;
   const selectedHeroesText =
     SELECTED_HEROES_LENGTH === ALL_HEROES_LENGTH
       ? "All heroes"
@@ -42,26 +46,25 @@ const UnlockedHeroes = () => {
         <button
           type="button"
           className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          onClick={() => setSelectedPeople([])}
+          onClick={() => onChange([])}
         >
           Select None
         </button>
         <button
           type="button"
           className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          onClick={() => setSelectedPeople([...allHeroes])}
+          onClick={() => onChange([...allHeroes])}
         >
           Select All
         </button>
       </div>
-      <Listbox value={selectedHeroes} onChange={setSelectedPeople} multiple>
+      <Listbox value={heroes} onChange={onChange} multiple>
         {({ open }) => (
           <>
             <div className="relative mt-1">
               <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 <span className="flex items-center">
                   <img
-                    // src={avatar(selected.id)}
                     src={avatar(1)}
                     alt=""
                     className="h-6 w-6 flex-shrink-0 rounded-full"
@@ -87,7 +90,7 @@ const UnlockedHeroes = () => {
                 leaveTo="opacity-0"
               >
                 <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                  {heroes.map((hero) => (
+                  {everyHero.map((hero) => (
                     <Listbox.Option
                       key={hero.id}
                       className={({ active }) =>
