@@ -1,9 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import BonusList from "../components/Bonus";
 import MyHero from "../components/MyHero";
 import UnlockedHeroes from "../components/UnlockedHeroes";
+import { bonuses } from "../data/bonuses";
 import styles from "../styles/Home.module.css";
+
+const tempBonuses = [...bonuses];
 
 const Home: NextPage = () => {
   return (
@@ -17,6 +21,7 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <MyHero />
         <UnlockedHeroes />
+        <BonusList bonuses={tempBonuses} />
       </main>
 
       <footer className={styles.footer}>

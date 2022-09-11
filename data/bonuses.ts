@@ -1,6 +1,6 @@
 import { Buff, Hero } from "./types";
 
-interface Bonus {
+export interface Bonus {
     id: number;
     attribute: Buff;
     percentIncrease: number;
