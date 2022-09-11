@@ -1,0 +1,33 @@
+export type Hero =
+    | "Aquea"
+    | "Atreus"
+    | "Ayana"
+    | "Blazo"
+    | "Bonnie"
+    | "Gugu"
+    | "Helix"
+    | "Iris"
+    | "Lina"
+    | "Melinda"
+    | "Meowgik"
+    | "Onir"
+    | "Ophelia"
+    | "Phoren"
+    | "Rolla"
+    | "Ryan"
+    | "Shade"
+    | "Shari"
+    | "Shingen"
+    | "Sylvan"
+    | "Taranis"
+    | "Urasil";
+
+export type Buff =
+| "Attack Speed"
+| "Crit Chance"
+| "Crit Damage"
+| "Damage bonus"
+| "Damage to Airborne Units"
+| "Damage to Bosses"
+| "Damage to Ground Units"
+| "Damage to Mobs";
