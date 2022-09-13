@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Bonus } from "../../data/bonuses";
 import SortMenu from "./sort";
 
@@ -9,13 +10,23 @@ interface BonusList {
 const BonusList = ({ bonuses, showNames = false }: BonusList) => {
   if (bonuses.length === 0) return <p>No matches.</p>;
 
+  const sortedBonuses = useMemo(() => {
+    return bonuses.sort((a, b) =>
+      a.percentIncrease > b.percentIncrease
+        ? -1
+        : a.percentIncrease === b.percentIncrease
+        ? 0
+        : 1
+    );
+  }, [bonuses]);
+
   return (
     <div>
       <SortMenu />
 
       <div className="h-screen overflow-y-auto bg-white shadow sm:rounded-md">
         <ul role="list" className="divide-y divide-gray-200">
-          {bonuses.map((bonus) => (
+          {sortedBonuses.map((bonus) => (
             <li key={bonus.id}>
               <a href="#" className="block hover:bg-gray-50">
                 <div className="flex items-center px-4 py-4 sm:px-6">
