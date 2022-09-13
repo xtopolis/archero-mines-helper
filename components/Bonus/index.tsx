@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { Bonus } from "../../data/bonuses";
-import SortMenu from "./sort";
 
 interface BonusList {
   bonuses: Bonus[];
@@ -22,8 +21,6 @@ const BonusList = ({ bonuses, showNames = false }: BonusList) => {
 
   return (
     <div>
-      <SortMenu />
-
       <div className="h-screen overflow-y-auto bg-white shadow sm:rounded-md">
         <ul role="list" className="divide-y divide-gray-200">
           {sortedBonuses.map((bonus) => (

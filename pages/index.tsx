@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useMemo, useState } from "react";
 import BonusList from "../components/Bonus";
+import Heading from "../components/Header";
 import MyHero from "../components/MyHero";
 import UnlockedHeroes from "../components/UnlockedHeroes";
 import { bonuses } from "../data/bonuses";
@@ -38,8 +39,16 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <MyHero hero={myHero} onChange={setMyHero} />
-        <UnlockedHeroes heroes={unlockedHeroes} onChange={setUnlockedHeroes} />
+        <div className="bg-white mx-auto px-0 pb-4  sticky top-0 z-50 border-b-4 border-slate-800">
+          <Heading />
+          <div className="px-2 flex flex-col gap-4">
+            <MyHero hero={myHero} onChange={setMyHero} />
+            <UnlockedHeroes
+              heroes={unlockedHeroes}
+              onChange={setUnlockedHeroes}
+            />
+          </div>
+        </div>
         <BonusList bonuses={activeBonuses} showNames />
       </main>
     </div>

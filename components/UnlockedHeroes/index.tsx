@@ -41,23 +41,8 @@ const UnlockedHeroes = ({ heroes, onChange }: iUnlockedHeroes) => {
       : "No heroes";
 
   return (
-    <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-      <div className="flex justify-between">
-        <button
-          type="button"
-          className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          onClick={() => onChange([])}
-        >
-          Select None
-        </button>
-        <button
-          type="button"
-          className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          onClick={() => onChange([...allHeroes])}
-        >
-          Select All
-        </button>
-      </div>
+    <div>
+      <p className="text-sm">Unlocked heroes:</p>
       <Listbox value={heroes} onChange={onChange} multiple>
         {({ open }) => (
           <>
@@ -142,6 +127,22 @@ const UnlockedHeroes = ({ heroes, onChange }: iUnlockedHeroes) => {
           </>
         )}
       </Listbox>
+      <div className="flex justify-between pt-4">
+        <button
+          type="button"
+          className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          onClick={() => onChange([])}
+        >
+          Select None
+        </button>
+        <button
+          type="button"
+          className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          onClick={() => onChange([...allHeroes])}
+        >
+          Select All
+        </button>
+      </div>
     </div>
   );
 };
