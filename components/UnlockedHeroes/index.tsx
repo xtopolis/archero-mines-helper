@@ -70,6 +70,9 @@ const UnlockedHeroes = ({ heroes, onChange }: iUnlockedHeroes) => {
                 type="button"
                 className="items-center right-0 absolute top-1/2 -translate-y-1/2 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 focus:outline-none"
                 onClick={() => onChange(allSelected ? [] : [...allHeroes])}
+                aria-label={
+                  allSelected ? "Deselect all heroes" : "Select all heroes"
+                }
               >
                 Select {allSelected ? "None" : "All"}
               </button>

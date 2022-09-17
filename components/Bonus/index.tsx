@@ -100,27 +100,25 @@ const BonusList = ({ bonuses }: BonusList) => {
             key={bonus.id}
             className="rounded-lg bg-white mt-4 mb-4 border border-slate-500 shadow"
           >
-            <div className="block">
-              <div className="flex items-center px-4 py-4 sm:px-6">
-                <div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
-                  <div className="truncate">
-                    <div className="flex text-sm">
-                      <p className={`truncate font-medium ${attributeClass}`}>
-                        {bonus.attribute}
-                      </p>
-                      <p className="ml-1 flex-shrink-0 font-normal text-gray-500">
-                        +{bonus.percentIncrease}%
-                      </p>
-                    </div>
+            <div className="flex items-center px-4 py-4 sm:px-6">
+              <div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
+                <div className="truncate">
+                  <div className="flex text-sm">
+                    <p className={`truncate font-medium ${attributeClass}`}>
+                      {bonus.attribute}
+                    </p>
+                    <p className="ml-1 flex-shrink-0 font-normal text-gray-500">
+                      +{bonus.percentIncrease}%
+                    </p>
                   </div>
-                  <div className="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
-                    <div className="flex space-x-2 overflow-hidden">
-                      <p key={bonus.id} className="text-sm text-gray-500">
-                        {bonus.heroes.join(", ")}
-                      </p>
-                    </div>
-                    {synergies && <Synergies synergies={synergies} />}
+                </div>
+                <div className="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
+                  <div className="flex space-x-2 overflow-hidden">
+                    <p key={bonus.id} className="text-sm text-gray-500">
+                      {bonus.heroes.join(", ")}
+                    </p>
                   </div>
+                  {synergies && <Synergies synergies={synergies} />}
                 </div>
               </div>
             </div>
