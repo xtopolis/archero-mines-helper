@@ -33,21 +33,20 @@ interface iUnlockedHeroes {
 
 const UnlockedHeroes = ({ heroes, onChange }: iUnlockedHeroes) => {
   const SELECTED_HEROES_LENGTH = heroes.length;
-  const selectedHeroesText =
-    SELECTED_HEROES_LENGTH === ALL_HEROES_LENGTH
-      ? "All heroes"
-      : SELECTED_HEROES_LENGTH
-      ? `${SELECTED_HEROES_LENGTH} heroes`
-      : "No heroes";
+  const allSelected = SELECTED_HEROES_LENGTH === ALL_HEROES_LENGTH;
+  const selectedHeroesText = allSelected
+    ? "All heroes"
+    : SELECTED_HEROES_LENGTH
+    ? `${SELECTED_HEROES_LENGTH} heroes`
+    : "No heroes";
 
   return (
     <div>
-      <p className="text-sm">Unlocked heroes:</p>
       <Listbox value={heroes} onChange={onChange} multiple>
         {({ open }) => (
           <>
             <div className="relative mt-1">
-              <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+              <Listbox.Button className="relative cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 <span className="flex items-center">
                   <img
                     src={avatar(1)}
@@ -66,6 +65,14 @@ const UnlockedHeroes = ({ heroes, onChange }: iUnlockedHeroes) => {
                   />
                 </span>
               </Listbox.Button>
+
+              <button
+                type="button"
+                className="items-center right-0 absolute top-1/2 -translate-y-1/2 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 focus:outline-none"
+                onClick={() => onChange(allSelected ? [] : [...allHeroes])}
+              >
+                Select {allSelected ? "None" : "All"}
+              </button>
 
               <Transition
                 show={open}
@@ -127,22 +134,6 @@ const UnlockedHeroes = ({ heroes, onChange }: iUnlockedHeroes) => {
           </>
         )}
       </Listbox>
-      <div className="flex justify-between pt-4">
-        <button
-          type="button"
-          className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          onClick={() => onChange([])}
-        >
-          Select None
-        </button>
-        <button
-          type="button"
-          className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          onClick={() => onChange([...allHeroes])}
-        >
-          Select All
-        </button>
-      </div>
     </div>
   );
 };
