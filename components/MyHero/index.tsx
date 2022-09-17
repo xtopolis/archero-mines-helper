@@ -2,28 +2,13 @@ import { Dispatch, Fragment, SetStateAction, useState } from "react";
 import { allHeroes, SingleHero } from "../../data/heroes";
 import { ChevronUpDownIcon, CheckIcon } from "@heroicons/react/24/solid";
 import { Transition, Listbox } from "@headlessui/react";
+import Image from "next/image";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 const everyHero = [...allHeroes].sort((a, b) => a.name.localeCompare(b.name));
-const avatar = (id: number) => {
-  const avatars = [
-    "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'",
-    "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'",
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80'",
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'",
-    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'",
-    "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'",
-    "https://images.unsplash.com/photo-1568409938619-12e139227838?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'",
-    "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'",
-    "https://images.unsplash.com/photo-1584486520270-19eca1efcce5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'",
-    "https://images.unsplash.com/photo-1561505457-3bcad021f8ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'",
-  ];
-  const a = Math.abs(avatars.length - id);
-  return avatars[a];
-};
 
 interface iMyHero {
   hero: SingleHero;
@@ -39,10 +24,12 @@ const MyHero = ({ hero, onChange }: iMyHero) => {
             <div className="relative mt-1">
               <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 <span className="flex items-center">
-                  <img
-                    src={avatar(hero.id)}
-                    alt=""
+                  <Image
+                    src={`/avatars/${hero.name.toLocaleLowerCase()}.jpeg`}
+                    alt={hero.name}
                     className="h-6 w-6 flex-shrink-0 rounded-full"
+                    width={24}
+                    height={24}
                   />
                   <span className="ml-3 block truncate">{hero.name}</span>
                 </span>
@@ -76,10 +63,12 @@ const MyHero = ({ hero, onChange }: iMyHero) => {
                       {({ selected, active }) => (
                         <>
                           <div className="flex items-center">
-                            <img
-                              src={avatar(hero.id)}
-                              alt=""
+                            <Image
+                              src={`/avatars/${hero.name.toLocaleLowerCase()}.jpeg`}
+                              alt={hero.name}
                               className="h-6 w-6 flex-shrink-0 rounded-full"
+                              width={24}
+                              height={24}
                             />
                             <span
                               className={classNames(
