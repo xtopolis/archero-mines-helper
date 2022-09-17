@@ -1,7 +1,7 @@
 import { Tab } from "@headlessui/react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import BonusList from "../components/Bonus";
 import Heading from "../components/Header";
 import MyHero from "../components/MyHero";
@@ -15,8 +15,25 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
+const localStorageKey = "ArcheroMinesHelperDefaultHero";
+const writeToLocalStorage = (heroName: string) => {
+  if (window.localStorage) {
+    window.localStorage.setItem(localStorageKey, heroName);
+  }
+};
+
 const Home: NextPage = () => {
   const [myHero, setMyHero] = useState<SingleHero>(defaultHero);
+  useEffect(() => {
+    if (window.localStorage) {
+      const storedHero = window.localStorage.getItem(localStorageKey);
+      const matchedHero = allHeroes.find((h) => h.name === storedHero);
+      setMyHero(matchedHero || defaultHero);
+    } else {
+      setMyHero(defaultHero);
+    }
+  }, []);
+
   const [unlockedHeroes, setUnlockedHeroes] = useState<SingleHero[]>([
     ...allHeroes,
   ]);
@@ -46,7 +63,13 @@ const Home: NextPage = () => {
         <div className="bg-white mx-auto flex flex-col h-screen overflow-hidden">
           <Heading />
           <div className="px-2 pt-2 flex flex-col gap-4 mb-4">
-            <MyHero hero={myHero} onChange={setMyHero} />
+            <MyHero
+              hero={myHero}
+              onChange={(v) => {
+                setMyHero(v);
+                writeToLocalStorage(v.name);
+              }}
+            />
             <UnlockedHeroes
               heroes={unlockedHeroes}
               onChange={setUnlockedHeroes}
