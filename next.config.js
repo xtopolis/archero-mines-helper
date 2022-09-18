@@ -4,7 +4,8 @@ const nextConfig = {
   swcMinify: true,
   images: {
     unoptimized: true,
-  }
+  },
+  basePath: "/archero-mines-helper"
 }
 
 module.exports = nextConfig
