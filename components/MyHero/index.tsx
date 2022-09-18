@@ -25,7 +25,7 @@ const MyHero = ({ hero, onChange }: iMyHero) => {
               <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 <span className="flex items-center">
                   <Image
-                    src={`/avatars/${hero.name.toLocaleLowerCase()}.jpeg`}
+                    src={`avatars/${hero.name.toLocaleLowerCase()}.jpeg`}
                     alt={hero.name}
                     className="h-6 w-6 flex-shrink-0 rounded-full"
                     width={24}
