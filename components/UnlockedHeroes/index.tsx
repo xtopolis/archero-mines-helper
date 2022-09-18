@@ -105,7 +105,7 @@ const UnlockedHeroes = ({ heroes, onChange }: iUnlockedHeroes) => {
                         <>
                           <div className="flex items-center">
                             <Image
-                              src={`/avatars/${hero.name.toLocaleLowerCase()}.jpeg`}
+                              src={`avatars/${hero.name.toLocaleLowerCase()}.jpeg`}
                               alt={hero.name}
                               className="h-6 w-6 flex-shrink-0 rounded-full"
                               width={24}
